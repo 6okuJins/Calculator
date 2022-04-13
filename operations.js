@@ -9,7 +9,7 @@ function operate(x, y, operator) {
     return operator == '+' ? add(x,y)
         : operator == '-' ? subtract(x,y)
         : operator == '*' ? multiply(x,y)
-        : operator == '/' ? divide(x,y)
+        : operator == '÷' ? divide(x,y)
         : false;
 }
 export {operate as default};
