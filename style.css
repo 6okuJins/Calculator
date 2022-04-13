@@ -5,12 +5,14 @@ body{
     align-items: center;
     height: 100vh;
 }
-.display {
+.display-container {
     width: 398px;
-    height: 100px;
+    height: 200px;
     border: 1px solid black;
     margin-bottom: 20px;
+
     display: flex;
+    flex-direction: column;
     justify-content: flex-end;
     align-items:flex-end;
     font-family: 'Segment7Standard';

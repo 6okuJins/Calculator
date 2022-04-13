@@ -5,7 +5,7 @@ let secondNumber = '';
 let currentOperation = '';
 
 const buttons = document.querySelectorAll('button');
-const display = document.querySelector('.display');
+const display = document.querySelector('.display-container');
 const opButtons = document.querySelector('.operator');
 function buttonPress() {
     if (this.className == 'number') {
