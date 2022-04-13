@@ -1,6 +1,6 @@
 import operate from './operations.js';
 
-let firstNumber = '';
+let firstNumber = '0';
 let secondNumber = '';
 let currentOperation = '';
 
@@ -8,18 +8,21 @@ const buttons = document.querySelectorAll('button');
 const mainDisplay = document.querySelector('#main-display');
 const opButtons = document.querySelector('.operator');
 const secondDisplay = document.querySelector('#second-display');
+
 function buttonPress() {
     if (this.className == 'number') {
         if (!(currentOperation || secondNumber)) {
+            if (firstNumber == 0) firstNumber = '';
             firstNumber += this.textContent;
             mainDisplay.textContent = firstNumber;
         }
-        else if (currentOperation && firstNumber) {
+        else if (currentOperation && (firstNumber != 0)) {
+            if (secondNumber == 0) secondNumber = '';
             secondNumber += this.textContent;
             mainDisplay.textContent = secondNumber;
         }
     }
-    else if (this.className == 'operator' && firstNumber) {
+    else if (this.className == 'operator' && (firstNumber != 0)) {
         deselectButton();
         currentOperation = this.textContent;
         this.setAttribute('id', 'selected');
@@ -38,10 +41,11 @@ function buttonPress() {
 }
 function clear() {
     if (secondNumber) {
-        secondNumber = mainDisplay.textContent = '';
+        secondNumber = mainDisplay.textContent = '0';
     }
     else {
-        firstNumber  = mainDisplay.textContent = secondDisplay.textContent = currentOperation = '';
+        firstNumber = mainDisplay.textContent = '0';
+        secondDisplay.textContent = currentOperation = '';
         deselectButton();
     }
 
