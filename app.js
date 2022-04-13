@@ -11,6 +11,9 @@ const secondDisplay = document.querySelector('#second-display');
 
 function buttonPress() {
     if (this.className == 'number') {
+        if (secondDisplay.textContent.includes('=') && !currentOperation){
+            clear();
+        }
         if (!(currentOperation || secondNumber)) {
             if (firstNumber == 0) firstNumber = '';
             firstNumber += this.textContent;
