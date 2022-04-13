@@ -41,6 +41,14 @@ function buttonPress() {
     else if (this.textContent == 'Clear') {
         clear();
     }
+    else if (this.textContent == "%") {
+        if (secondNumber && secondNumber != 0) {
+            secondNumber = mainDisplay.textContent = operate(secondNumber, '100', '÷');
+        }
+        else if (firstNumber && firstNumber != 0 && !currentOperation) {
+            firstNumber = mainDisplay.textContent = operate(firstNumber, '100', '÷');
+        }
+    }
 }
 function clear() {
     if (secondNumber) {
