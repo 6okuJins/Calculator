@@ -49,6 +49,14 @@ function buttonPress() {
             firstNumber = mainDisplay.textContent = operate(firstNumber, '100', '÷');
         }
     }
+    else if (this.textContent == "+/-") {
+        if (secondNumber && secondNumber != 0) {
+            secondNumber = mainDisplay.textContent = operate('0', secondNumber, '-');
+        }
+        else if (firstNumber && firstNumber != 0 && !currentOperation) {
+            firstNumber = mainDisplay.textContent = operate('0', firstNumber, '-');
+        }
+    }
 }
 function clear() {
     if (secondNumber) {
