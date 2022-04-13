@@ -25,10 +25,23 @@ function buttonPress() {
     }
     else if (this.className == 'operator equals' && secondNumber) {
         deselectButton();
-        firstNumber = operate(firstNumber, secondNumber, currentOperation);
+        firstNumber = String(operate(firstNumber, secondNumber, currentOperation));
         display.textContent = firstNumber;
         secondNumber = currentOperation = '';
     }
+    else if (this.textContent == 'Clear') {
+        clear();
+    }
+}
+function clear() {
+    if (secondNumber) {
+        secondNumber = display.textContent = '';
+    }
+    else {
+        firstNumber  = display.textContent = currentOperation = '';
+        deselectButton();
+    }
+
 }
 function deselectButton() {
     if (document.getElementById('selected')) {
