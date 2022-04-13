@@ -5,28 +5,31 @@ let secondNumber = '';
 let currentOperation = '';
 
 const buttons = document.querySelectorAll('button');
-const display = document.querySelector('.display-container');
+const mainDisplay = document.querySelector('#main-display');
 const opButtons = document.querySelector('.operator');
+const secondDisplay = document.querySelector('#second-display');
 function buttonPress() {
     if (this.className == 'number') {
         if (!(currentOperation || secondNumber)) {
             firstNumber += this.textContent;
-            display.textContent = firstNumber;
+            mainDisplay.textContent = firstNumber;
         }
         else if (currentOperation && firstNumber) {
             secondNumber += this.textContent;
-            display.textContent = secondNumber;
+            mainDisplay.textContent = secondNumber;
         }
     }
     else if (this.className == 'operator' && firstNumber) {
         deselectButton();
         currentOperation = this.textContent;
         this.setAttribute('id', 'selected');
+        secondDisplay.textContent = `${firstNumber} ${currentOperation}`;
     }
     else if (this.className == 'operator equals' && secondNumber) {
         deselectButton();
+        secondDisplay.textContent = `${firstNumber} ${currentOperation} ${secondNumber} =`;
         firstNumber = String(operate(firstNumber, secondNumber, currentOperation));
-        display.textContent = firstNumber;
+        mainDisplay.textContent = firstNumber;
         secondNumber = currentOperation = '';
     }
     else if (this.textContent == 'Clear') {
@@ -35,10 +38,10 @@ function buttonPress() {
 }
 function clear() {
     if (secondNumber) {
-        secondNumber = display.textContent = '';
+        secondNumber = mainDisplay.textContent = '';
     }
     else {
-        firstNumber  = display.textContent = currentOperation = '';
+        firstNumber  = mainDisplay.textContent = secondDisplay.textContent = currentOperation = '';
         deselectButton();
     }
 

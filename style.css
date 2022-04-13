@@ -7,7 +7,7 @@ body{
 }
 .display-container {
     width: 398px;
-    height: 200px;
+    height: 140px;
     border: 1px solid black;
     margin-bottom: 20px;
 
@@ -15,9 +15,13 @@ body{
     flex-direction: column;
     justify-content: flex-end;
     align-items:flex-end;
+    gap: 10px;
+
     font-family: 'Segment7Standard';
     font-size: 70px;
-
+}
+#second-display {
+    font-size: 30px;
 }
 .buttons {
     display: grid;
