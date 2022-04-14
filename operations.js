@@ -8,7 +8,7 @@ function operate(x, y, operator) {
     y = Number(y);
     return operator == '+' ? add(x,y)
         : operator == '-' ? subtract(x,y)
-        : operator == '*' ? multiply(x,y)
+        : operator == 'x' ? multiply(x,y)
         : operator == '÷' ? divide(x,y)
         : false;
 }
