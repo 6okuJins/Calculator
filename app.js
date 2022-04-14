@@ -17,46 +17,55 @@ function buttonPress() {
         if (!(currentOperation || secondNumber)) {
             if (firstNumber == 0) firstNumber = '';
             firstNumber += this.textContent;
-            mainDisplay.textContent = firstNumber;
+            mainDisplay.textContent = round(firstNumber);
         }
         else if (currentOperation && (firstNumber != 0)) {
             if (secondNumber == 0) secondNumber = '';
             secondNumber += this.textContent;
-            mainDisplay.textContent = secondNumber;
+            mainDisplay.textContent = round(secondNumber);
         }
     }
     else if (this.className == 'operator' && (firstNumber != 0)) {
         deselectButton();
         currentOperation = this.textContent;
         this.setAttribute('id', 'selected');
-        secondDisplay.textContent = `${firstNumber} ${currentOperation}`;
+        secondDisplay.textContent = `${round(firstNumber)} ${currentOperation}`;
     }
     else if (this.className == 'operator equals' && secondNumber) {
         deselectButton();
-        secondDisplay.textContent = `${firstNumber} ${currentOperation} ${secondNumber} =`;
+        secondDisplay.textContent = `${round(firstNumber)} ${currentOperation} ${round(secondNumber)} =`;
         firstNumber = String(operate(firstNumber, secondNumber, currentOperation));
-        mainDisplay.textContent = firstNumber;
+        mainDisplay.textContent = round(firstNumber);
         secondNumber = currentOperation = '';
     }
     else if (this.textContent == 'Clear') {
         clear();
     }
     else if (this.textContent == "%") {
-        if (secondNumber && secondNumber != 0) {
+        if (secondNumber && secondNumber != "0") {
             secondNumber = mainDisplay.textContent = operate(secondNumber, '100', '÷');
         }
-        else if (firstNumber && firstNumber != 0 && !currentOperation) {
+        else if (firstNumber && firstNumber != "0" && !currentOperation) {
             firstNumber = mainDisplay.textContent = operate(firstNumber, '100', '÷');
         }
     }
     else if (this.textContent == "+/-") {
-        if (secondNumber && secondNumber != 0) {
+        if (secondNumber && secondNumber != "0") {
             secondNumber = mainDisplay.textContent = operate('0', secondNumber, '-');
         }
-        else if (firstNumber && firstNumber != 0 && !currentOperation) {
+        else if (firstNumber && firstNumber != "0" && !currentOperation) {
             firstNumber = mainDisplay.textContent = operate('0', firstNumber, '-');
         }
     }
+    else if (this.textContent == '.') {
+        if (secondNumber && secondNumber != "0" && !(secondNumber.includes("."))) {
+            secondNumber += this.textContent;
+        }
+        else if (firstNumber && firstNumber != "0" && !(firstNumber.includes("."))) {
+            firstNumber += this.textContent;
+        }
+    }
+    
 }
 function clear() {
     if (secondNumber) {
@@ -74,6 +83,8 @@ function deselectButton() {
         document.getElementById('selected').removeAttribute('id');
     }
 }
+const round = (n) => String(Math.round(n * 100) / 100);
+
 buttons.forEach(button => button.addEventListener('click', buttonPress));
 const body = document.querySelector('body');
 
