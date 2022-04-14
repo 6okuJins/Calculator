@@ -1,7 +1,7 @@
 import operate from './operations.js';
 
 let firstNumber = '0';
-let secondNumber = '';
+let secondNumber = '0';
 let currentOperation = '';
 
 const buttons = document.querySelectorAll('button');
@@ -14,29 +14,30 @@ function buttonPress() {
         if (secondDisplay.textContent.includes('=') && !currentOperation){
             clear();
         }
-        if (!(currentOperation || secondNumber)) {
+        if (!(currentOperation || secondNumber != "0")) {
             if (firstNumber == 0) firstNumber = '';
             firstNumber += this.textContent;
             mainDisplay.textContent = round(firstNumber);
         }
-        else if (currentOperation && (firstNumber != 0)) {
+        else if (currentOperation && (firstNumber != "0")) {
             if (secondNumber == 0) secondNumber = '';
             secondNumber += this.textContent;
             mainDisplay.textContent = round(secondNumber);
         }
     }
-    else if (this.className == 'operator' && (firstNumber != 0)) {
+    else if (this.className == 'operator' && (firstNumber != "0") && (secondNumber == "0")) {
         deselectButton();
         currentOperation = this.textContent;
         this.setAttribute('id', 'selected');
         secondDisplay.textContent = `${round(firstNumber)} ${currentOperation}`;
     }
-    else if (this.className == 'operator equals' && secondNumber) {
+    else if (this.className == 'operator equals' && secondNumber != "0") {
         deselectButton();
         secondDisplay.textContent = `${round(firstNumber)} ${currentOperation} ${round(secondNumber)} =`;
         firstNumber = String(operate(firstNumber, secondNumber, currentOperation));
         mainDisplay.textContent = round(firstNumber);
-        secondNumber = currentOperation = '';
+        secondNumber = "0";
+        currentOperation = '';
     }
     else if (this.textContent == 'Clear') {
         clear();
@@ -68,7 +69,7 @@ function buttonPress() {
     
 }
 function clear() {
-    if (secondNumber) {
+    if (secondNumber != "0") {
         secondNumber = mainDisplay.textContent = '0';
     }
     else {
