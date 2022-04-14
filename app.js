@@ -87,9 +87,9 @@ function deselectButton() {
 const round = (n) => String(Math.round(n * 100) / 100);
 
 buttons.forEach(button => button.addEventListener('click', buttonPress));
-const body = document.querySelector('body');
+/*const body = document.querySelector('body');
 
 const showVars = document.createElement('button');
 body.appendChild(showVars);
 showVars.textContent = "SHOW VARIABLES";
-showVars.addEventListener('click', () => console.log(firstNumber, secondNumber, currentOperation));
+showVars.addEventListener('click', () => console.log(firstNumber, secondNumber, currentOperation));*/
