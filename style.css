@@ -94,3 +94,8 @@ button:active {
     background-color: rgb(225, 225, 234)
 
 }
+.title {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
